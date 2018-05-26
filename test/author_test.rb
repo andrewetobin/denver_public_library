@@ -4,20 +4,28 @@ require './lib/book'
 
 class AuthorTest < Minitest::Test
 
-  def test_author_has_books
-    charlotte_bronte = Author.new({first_name: "Charlotte", last_name: "Bronte"})
+  def test_it_exists
+    book = Author.new({first_name: "Charlotte", last_name: "Bronte"})
 
-    assert_equal [], charlotte_bronte.books
+    assert_instance_of Author, book
   end
 
-  def test_it_can_add_a_book
-    charlotte_bronte = Author.new({first_name: "Charlotte", last_name: "Bronte"})
-    book = Book.new({author_first_name: "Charlotte", author_last_name: "Bronte", title: "Jane Eyre", publication_date: "October 16, 1847"})
+  def test_it_starts_with_no_books
+    author = Author.new({first_name: "Charlotte", last_name: "Bronte"})
 
-    assert_equal "Charlotte", book.author_first_name
-    assert_equal "Bronte", book.author_last_name
-    assert_equal "1847", book.publication_date
-    assert_equal "Jane Eyre", book.title
+    assert_equal [], author.books
+  end
+
+  def test_add_book
+    charlotte_bronte = Author.new({first_name: "Charlotte", last_name: "Bronte"})
+
+    charlotte_bronte.add_book("Jane Eyre", "October 16, 1847")
+
+    assert_instance_of Book, charlotte_bronte.books[0]
+
+    charlotte_bronte.add_book("Villette", "1853")
+
+    assert_equal 2, charlotte_bronte.books.length
   end
 
 

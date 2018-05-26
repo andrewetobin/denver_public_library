@@ -1,16 +1,15 @@
+require './lib/author'
+
 class Book
   attr_reader   :author_first_name,
                 :author_last_name,
-                :title
-  attr_accessor :publication_date
+                :title,
+                :publication_date
 
-  def initialize args
-    args.each do |k,v|
-      instance_variable_set("@#{k}", v) unless v.nil?
-    end
-    @publication_date = publication_date[-4..-1]
-    @author_first_name
-    @author_last_name
-    @title
+  def initialize(book)
+    @author_first_name = book[:author_first_name]
+    @author_last_name = book[:author_last_name]
+    @title = book[:title]
+    @publication_date = book[:publication_date][-4..-1]
   end
 end

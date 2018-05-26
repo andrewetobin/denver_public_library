@@ -1,18 +1,21 @@
+require './lib/book'
+
 class Author
   attr_reader    :first_name,
-                 :last_name
-   attr_accessor :books
+                 :last_name,
+                 :books
 
 
-  def initialize args
-    args.each do |k,v|
-      instance_variable_set("@#{k}", v) unless v.nil?
-    end
+  def initialize(author)
+    @first_name = author[:first_name]
+    @last_name = author[:last_name]
     @books = []
   end
 
   def add_book(title, pub_date)
-    @books <<
+    book = Book.new({author_first_name: @first_name, author_last_name: @last_name, title: title, publication_date: pub_date})
+    @books << book
+    return book
 
   end
 
